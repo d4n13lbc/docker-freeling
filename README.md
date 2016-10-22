@@ -8,25 +8,25 @@ As a standalone mode you run the analyzer one time per input file
 ### Create the docker image
 
 ```
-docker build -t freeling .
+$ docker build -t freeling .
 ```
 
 ### Create an input file
 
 ```
-echo "El gato come pescado. Pero a Don Jaime no le gustan los gatos." > input.txt
+$ echo "El gato come pescado. Pero a Don Jaime no le gustan los gatos." > input.txt
 ```
 
 ### Run the container
 
 ```
-docker run -i --rm  freeling analyze -f en.cfg < input.txt > output.txt
+$ docker run -i --rm  freeling analyze -f en.cfg < input.txt > output.txt
 ```
 
 ### Check the output
 
 ```
-cat ouput.txt
+$ cat ouput.txt
 El el NN 1
 gato gato NN 0.888907
 come come VBN 0.186036
