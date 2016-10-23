@@ -1,6 +1,6 @@
 # Docker-Freeling
 
-Dockerfile in this folder is a modified version of the original one with only support for English and Spanish languages. Freeling can run in different modes: server mode, and standalone mode. You can create application that consumes services from freeling running standalone or as a server (check references for ways of execute shell commands from python)  
+Dockerfile in this folder is a modified version of the original one with only support for English and Spanish languages. Freeling can run in different modes: server mode and standalone mode. You can create application that consumes services from freeling running standalone or as a server (check references for ways of execute shell commands from python)  
 
 ## Create the docker image
 
@@ -58,16 +58,48 @@ gatos gato NCMP000 1
 ```
 
 ## Server mode
-As a server mode you have to start a container in background mode
+As a server mode you have to start a container in background mode and use a client to request an analysis
+
+### Create an input file
+
+```
+$ echo "El gato come pescado. Pero a Don Jaime no le gustan los gatos." > input.txt
+```
+
+### Run the server container
 
 ```
  docker run -it --rm -p 50005:50005 freeling analyze -es.cfg --server -p 50005
 ```
 
-And then use the freeling client to make a query to the server
+### Make a request
+
+You can make an analysis request to the server container from localhost (127.0.0.1) or from a remote machine.
 
 ```
-analyzer_client localhost:50005 < input.txt > output.txt
+$ chmod +x analyzer_client
+$ ./analyzer_client localhost:50005 < input.txt > output.txt
+```
+
+### Check the output
+
+```
+$ cat output.txt
+El el DA0MS0 1
+gato gato NCMS000 1
+come comer VMIP3S0 0.978902
+pescado pescado NCMS000 0.822581
+. . Fp 1
+
+Pero pero CC 0.999902
+a a SP 0.998775
+Don_Jaime don_jaime NP00000 1
+no no RN 0.999297
+le le PP3CSD0 1
+gustan gustar VMIP3P0 1
+los el DA0MP0 0.992728
+gatos gato NCMP000 1
+. . Fp 1
 ```
 
 ### References
