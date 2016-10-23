@@ -8,7 +8,7 @@ Dockerfile in this folder is a modified version of the original one with only su
 $ docker build -t freeling .
 ```
 
-## 2. Configuration file
+## 2. Configuration file (Optional)
 If configuration file is not in your folder it is searched inside the container in the path _/usr/local/share/freeling/config/_ . You can check the configuration files creating a temporary
 docker container
 
@@ -31,7 +31,7 @@ As a standalone mode you run the analyzer one time per input file
 $ echo "El gato come pescado. Pero a Don Jaime no le gustan los gatos." > input.txt
 ```
 
-### Run the container
+### Create a container
 You have to specify the configuration file according with the input language
 
 ```
@@ -68,10 +68,10 @@ As a server mode you have to start a container in background mode and use a clie
 $ echo "El gato come pescado. Pero a Don Jaime no le gustan los gatos." > input.txt
 ```
 
-### Run the server container
+### Create a server container
 
 ```
- docker run -it --rm -p 50005:50005 freeling analyze -es.cfg --server -p 50005
+ $ docker run -it --rm -p 50005:50005 freeling analyze -es.cfg --server -p 50005
 ```
 
 ### Make a request
@@ -104,7 +104,14 @@ gatos gato NCMP000 1
 . . Fp 1
 ```
 
-### 4. References
+### 4. Python
+You can create a python script or python webservice that uses docker analyzer_client to make request to a freeling server container. Other option is to create a python socket for making requests.
+
+***
+Here code that uses POPEN for executing analyzer_client and parsing output, check ICESI-Training/microservices2016b for more info
+***
+
+### 5. References
 https://github.com/TALP-UPC/FreeLing/tree/master/APIs/docker  
 https://talp-upc.gitbooks.io/freeling-user-manual/content/analyzer.html  
 https://github.com/ICESI-Training/microservices2016b
