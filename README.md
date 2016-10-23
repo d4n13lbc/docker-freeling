@@ -2,13 +2,13 @@
 
 Dockerfile in this folder is a modified version of the original one with only support for English and Spanish languages. Freeling can run in different modes: server mode and standalone mode. You can create application that consumes services from freeling running standalone or as a server (check references for ways of execute shell commands from python)  
 
-## Create the docker image
+## 1. Create the docker image
 
 ```
 $ docker build -t freeling .
 ```
 
-## Configuration file
+## 2. Configuration file
 If configuration file is not in your folder it is searched inside the container in the path _/usr/local/share/freeling/config/_ . You can check the configuration files creating a temporary
 docker container
 
@@ -20,7 +20,9 @@ $ docker run -it --rm freeling /bin/bash
 
 You can also use this for checking other files or debugging purposes
 
-## Standalone mode
+## 3. Modes
+
+## A. Standalone mode
 As a standalone mode you run the analyzer one time per input file
 
 ### Create an input file
@@ -57,7 +59,7 @@ gatos gato NCMP000 1
 . . Fp 1
 ```
 
-## Server mode
+## B. Server mode
 As a server mode you have to start a container in background mode and use a client to request an analysis
 
 ### Create an input file
@@ -102,7 +104,7 @@ gatos gato NCMP000 1
 . . Fp 1
 ```
 
-### References
+### 4. References
 https://github.com/TALP-UPC/FreeLing/tree/master/APIs/docker  
 https://talp-upc.gitbooks.io/freeling-user-manual/content/analyzer.html  
 https://github.com/ICESI-Training/microservices2016b
