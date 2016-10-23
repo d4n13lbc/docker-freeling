@@ -1,15 +1,27 @@
 # Docker-Freeling
 
-Freeling can run in different modes: server mode, and standalone mode. You can create application that consumes services from freeling running standalone or as a server (check references for ways of execute shell commands from python)  
+Dockerfile in this folder is a modified version of the original one with only support for English and Spanish languages. Freeling can run in different modes: server mode, and standalone mode. You can create application that consumes services from freeling running standalone or as a server (check references for ways of execute shell commands from python)  
 
-## Standalone mode
-As a standalone mode you run the analyzer one time per input file
-
-### Create the docker image
+## Create the docker image
 
 ```
 $ docker build -t freeling .
 ```
+
+## Configuration file
+If configuration file is not in your folder it is searched inside the container in the path _/usr/local/share/freeling/config/_ . You can check the configuration files creating a temporary
+docker container
+
+```
+$ docker run -it --rm freeling /bin/bash
+# cd /usr/local/share/freeling/config/
+# ls
+```
+
+You can also use this for checking other files or debugging purposes
+
+## Standalone mode
+As a standalone mode you run the analyzer one time per input file
 
 ### Create an input file
 
@@ -18,32 +30,45 @@ $ echo "El gato come pescado. Pero a Don Jaime no le gustan los gatos." > input.
 ```
 
 ### Run the container
+You have to specify the configuration file according with the input language
 
 ```
-$ docker run -i --rm  freeling analyze -f en.cfg < input.txt > output.txt
+$ docker run -i --rm  freeling analyze -f es.cfg < input.txt > output.txt
 ```
 
 ### Check the output
 
 ```
 $ cat ouput.txt
-El el NN 1
-gato gato NN 0.888907
-come come VBN 0.186036
-pescado pescado NN 0.917823
+El el DA0MS0 1
+gato gato NCMS000 1
+come comer VMIP3S0 0.978902
+pescado pescado NCMS000 0.822581
 . . Fp 1
 
-Pero_a_Don_Jaime pero_a_don_jaime NP 1
-no no DT 0.99987
-le le JJ 0.440988
-gustan gustan JJ 0.73283
-los los NNS 1
-gatos gatos NNS 0.601624
+Pero pero CC 0.999902
+a a SP 0.998775
+Don_Jaime don_jaime NP00000 1
+no no RN 0.999297
+le le PP3CSD0 1
+gustan gustar VMIP3P0 1
+los el DA0MP0 0.992728
+gatos gato NCMP000 1
 . . Fp 1
 ```
 
 ## Server mode
-Pending...
+As a server mode you have to start a container in background mode
+
+```
+ docker run -it --rm -p 50005:50005 freeling analyze -es.cfg --server -p 50005
+```
+
+And then use the freeling client to make a query to the server
+
+```
+analyzer_client localhost:50005 < input.txt > output.txt
+```
 
 ### References
 https://github.com/TALP-UPC/FreeLing/tree/master/APIs/docker  

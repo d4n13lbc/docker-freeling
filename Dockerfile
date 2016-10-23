@@ -26,6 +26,18 @@ RUN locale-gen en_US.UTF-8 && \
             automake autoconf libtool wget && \
     apt-get autoremove -y && \
     apt-get clean -y && \
+    rm -rf /usr/local/share/freeling/as && \
+    rm -rf /usr/local/share/freeling/ca && \
+    rm -rf /usr/local/share/freeling/cy && \
+    rm -rf /usr/local/share/freeling/de && \
+    rm -rf /usr/local/share/freeling/fr && \
+    rm -rf /usr/local/share/freeling/gl && \
+    rm -rf /usr/local/share/freeling/hr && \
+    rm -rf /usr/local/share/freeling/it && \
+    rm -rf /usr/local/share/freeling/nb && \
+    rm -rf /usr/local/share/freeling/pt && \
+    rm -rf /usr/local/share/freeling/ru && \
+    rm -rf /usr/local/share/freeling/sl && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /root
