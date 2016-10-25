@@ -115,3 +115,4 @@ Here code that uses POPEN for executing analyzer_client and parsing output, chec
 https://github.com/TALP-UPC/FreeLing/tree/master/APIs/docker  
 https://talp-upc.gitbooks.io/freeling-user-manual/content/analyzer.html  
 https://github.com/ICESI-Training/microservices2016b
+https://github.com/malev/pyfreeling

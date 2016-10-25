@@ -25,6 +25,11 @@ RUN wget --progress=dot:giga https://github.com/TALP-UPC/FreeLing/releases/downl
 RUN cd /tmp && svn export https://github.com/TALP-UPC/FreeLing.git/trunk/APIs --trust-server-cert && cd APIs/python && make
 RUN mkdir -p /root/.local/lib/python3.4/site-packages/ && cd /tmp/APIs/python && cp -r * /root/.local/lib/python3.4/site-packages/
 
+# Install pyfreeling
+RUN apt-get install -y python3-pip libxml2-dev libxslt1-dev && pip3 install lxml && pip3 install pyfreeling && \
+    sed -i -e "s/(input)/(input.encode('utf8'))/g" /usr/local/lib/python3.4/dist-packages/pyfreeling/__init__.py
+COPY pyfreeling_sample.py /tmp/pyfreeling_sample.py
+
 # Delete files
 #RUN rm -rf /tmp/FreeLing-4.0 && \
 #    apt-get --purge -y remove build-essential libicu-dev \
