@@ -105,11 +105,21 @@ gatos gato NCMP000 1
 ```
 
 ### 4. Python
-You can create a python script or python webservice that uses docker analyzer_client to make request to a freeling server container. Other option is to create a python socket for making requests.
+You have several options for using freeling with python. You can create a python script or python webservice that uses docker analyzer_client to make request to a freeling server container.
 
-***
-Here code that uses POPEN for executing analyzer_client and parsing output, check ICESI-Training/microservices2016b for more info
-***
+```
+Here code that uses POPEN for executing the analyzer_client and parsing output, check ICESI-Training/microservices2016b for more info
+```
+
+Other option is to use pyfreeling.
+
+```
+$ docker run -it --rm freeling /bin/bash
+# cd/tmp
+# python3 pyfreeling_sample.py
+```
+
+And the last one is to use the Python API.
 
 ### 5. References
 https://github.com/TALP-UPC/FreeLing/tree/master/APIs/docker  
